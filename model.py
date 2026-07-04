@@ -91,8 +91,10 @@ def adverse_selection_loss(fair_value, bid, ask, informed_values, informed_proba
     
     return float(expected_loss)
 
-# Step 9 - uncertainty_spread (not yet solved)
-# TODO: implement
+# Step 9 - uncertainty_spread
+def uncertainty_spread(base_spread, uncertainty):
+    s = base_spread + uncertainty
+    return s
 
 # Step 10 - inventory_skewed_quotes (not yet solved)
 # TODO: implement
