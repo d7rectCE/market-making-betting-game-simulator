@@ -49,8 +49,14 @@ def pay_per_reroll_die_game(sides, reroll_cost):
 # Step 4 - red_black_card_game_value (not yet solved)
 # TODO: implement
 
-# Step 5 - make_quotes (not yet solved)
-# TODO: implement
+# Step 5 - make_quotes
+def make_quotes(fair_value, spread_width):
+    bid = fair_value - spread_width/2
+    ask = fair_value + spread_width/2
+    return {
+        "bid": bid,
+        "ask": ask
+    }
 
 # Step 6 - execute_trade (not yet solved)
 # TODO: implement
