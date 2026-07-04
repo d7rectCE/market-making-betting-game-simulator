@@ -13,7 +13,7 @@ python scaffold.py
 - [x] **1.** expected_value
 - [x] **2.** one_reroll_die_value
 - [x] **3.** pay_per_reroll_die_game
-- [ ] **4.** red_black_card_game_value
+- [x] **4.** red_black_card_game_value
 - [x] **5.** make_quotes
 - [x] **6.** execute_trade
 - [x] **7.** mark_to_market_pnl

@@ -46,8 +46,42 @@ def pay_per_reroll_die_game(sides, reroll_cost):
         'value': best_value
     }
 
-# Step 4 - red_black_card_game_value (not yet solved)
-# TODO: implement
+# Step 4 - red_black_card_game_value
+from functools import lru_cache
+def red_black_card_game_value(num_red, num_black):
+    
+    @lru_cache(maxsize=None)
+    def V(r, b):
+        if r == 0:
+            return 0.0
+        if b == 0:
+            return float(r)
+        
+        total = r + b
+        draw_red = (r / total) * (1 + V(r - 1, b))
+        draw_black = (b / total) * (-1 + V(r, b - 1))
+        cont = draw_red + draw_black
+        
+        return max(0.0, cont)
+
+    value = V(num_red, num_black)
+    
+    def continuation_value():
+        r, b = num_red, num_black
+        if r == 0:
+            return 0.0
+        if b == 0:
+            return float(r)
+        
+        total = r + b
+        draw_red = (r / total) * (1 + V(r - 1, b))
+        draw_black = (b / total) * (-1 + V(r, b - 1))
+        return draw_red + draw_black
+    
+    cont = continuation_value()
+    stop_now = cont <= 0.0
+    
+    return {'value': value, 'stop_now': stop_now}
 
 # Step 5 - make_quotes
 def make_quotes(fair_value, spread_width):
