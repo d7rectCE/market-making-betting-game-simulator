@@ -79,8 +79,17 @@ def execute_trade(state, side, bid, ask, size=1):
 def mark_to_market_pnl(cash, inventory, settlement_value):
     return cash + inventory * settlement_value
 
-# Step 8 - adverse_selection_loss (not yet solved)
-# TODO: implement
+# Step 8 - adverse_selection_loss
+def adverse_selection_loss(fair_value, bid, ask, informed_values, informed_probabilities):
+    informed_values = np.array(informed_values)
+    informed_probabilities = np.array(informed_probabilities)
+    
+    ask_loss = np.maximum(informed_values - ask, 0.0)
+    bid_loss = np.maximum(bid - informed_values, 0.0)
+    
+    expected_loss = np.sum(informed_probabilities * ask_loss) + np.sum(informed_probabilities * bid_loss)
+    
+    return float(expected_loss)
 
 # Step 9 - uncertainty_spread (not yet solved)
 # TODO: implement
