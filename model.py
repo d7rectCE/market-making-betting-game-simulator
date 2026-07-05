@@ -151,8 +151,32 @@ def update_fair_value_from_trade(fair_value, side, bid, ask, adjustment):
     new_fair = fair_value + direction * (adjustment * half_spread)
     return new_fair
 
-# Step 12 - update_remaining_card_value (not yet solved)
-# TODO: implement
+# Step 12 - update_remaining_card_value
+def update_remaining_card_value(remaining_counts, revealed_value):
+    updated_counts = dict(remaining_counts)
+    
+    if revealed_value in updated_counts:
+        updated_counts[revealed_value] -= 1
+        if updated_counts[revealed_value] <= 0:
+            del updated_counts[revealed_value]
+            
+    total_cards = sum(updated_counts.values())
+    
+    if total_cards == 0:
+        return {
+            'remaining_counts': updated_counts,
+            'expected_value': 0.0
+        }
+        
+    values = list(updated_counts.keys())
+    probabilities = [count / total_cards for count in updated_counts.values()]
+    
+    ev = float(expected_value(values, probabilities))
+    
+    return {
+        'remaining_counts': updated_counts,
+        'expected_value': ev
+    }
 
 # Step 13 - run_market_making_episode
 def run_market_making_episode(true_value, counterparty_sides, initial_fair_value, config):
