@@ -1,30 +1,21 @@
-# Market-Making & Betting-Game Simulator
+# Market-making & betting-game simulator
 
-Build a market-making and betting-game simulator from the ground up: start with expected-value reasoning on dice and card games, then implement a quoting engine that trades against an informed counterparty while managing inventory, adverse selection, and P&L across many episodes.
-
-## How to run
+Симулятор маркет-мейкера на numpy плюс несколько EV-задач для разминки (кости с рероллами, red/black карточная игра через мемоизированную рекурсию).
 
 ```bash
 python scaffold.py
 ```
 
-## Steps
+Печатает решения EV-задач, механику котировок по отдельности, один полный эпизод торговли и монте-карло на 200 эпизодов (mean / std / worst P&L).
 
-- [x] **1.** expected_value
-- [x] **2.** one_reroll_die_value
-- [x] **3.** pay_per_reroll_die_game
-- [x] **4.** red_black_card_game_value
-- [x] **5.** make_quotes
-- [x] **6.** execute_trade
-- [x] **7.** mark_to_market_pnl
-- [x] **8.** adverse_selection_loss
-- [x] **9.** uncertainty_spread
-- [x] **10.** inventory_skewed_quotes
-- [x] **11.** update_fair_value_from_trade
-- [x] **12.** update_remaining_card_value
-- [x] **13.** run_market_making_episode
-- [x] **14.** summarize_episode_pnls
+Маркет-мейкер котирует вокруг fair value с тремя поправками: спред расширяется на неопределённость, середина скашивается против инвентаря (в лонге — котировки ниже, чтобы поток разгружал позицию), после каждой сделки fair value сдвигается на долю полуспреда в сторону сделки. Отдельно считается ожидаемый убыток против информированного контрагента — он торгует только когда котировка хуже истинной цены.
+
+## Заметки
+
+Дольше всего разбирался с карточными играми и теорией вероятностей.
+
+Модель игрушечная: контрагент один, размер сделки 1, поток задаётся списком и на котировки не реагирует. Adverse selection посчитан отдельной функцией, в сам эпизод не встроен.
 
 ---
 
-Built on Deep-ML.
+Разбивка на шаги — с deep-ml.com, решения мои.
