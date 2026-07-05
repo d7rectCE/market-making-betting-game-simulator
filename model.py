@@ -6,7 +6,7 @@ Assembled from your step-by-step solutions.
 
 import numpy as np
 
-# Step 1 - expected_value
+
 def expected_value(values, probabilities):
     values = np.array(values)
     probabilities = np.array(probabilities)
@@ -14,7 +14,7 @@ def expected_value(values, probabilities):
     E = np.sum(values * probabilities)
     return E
 
-# Step 2 - one_reroll_die_value
+
 def one_reroll_die_value(sides):
     faces = np.arange(1, sides + 1)
     mu = expected_value(faces, np.ones(sides) / sides)
@@ -29,7 +29,7 @@ def one_reroll_die_value(sides):
         'reroll_faces': reroll_faces
     }
 
-# Step 3 - pay_per_reroll_die_game
+
 def pay_per_reroll_die_game(sides, reroll_cost):
     best_value = -float('inf')
     best_threshold = 1
@@ -46,7 +46,7 @@ def pay_per_reroll_die_game(sides, reroll_cost):
         'value': best_value
     }
 
-# Step 4 - red_black_card_game_value
+
 from functools import lru_cache
 def red_black_card_game_value(num_red, num_black):
     
@@ -83,7 +83,7 @@ def red_black_card_game_value(num_red, num_black):
     
     return {'value': value, 'stop_now': stop_now}
 
-# Step 5 - make_quotes
+
 def make_quotes(fair_value, spread_width):
     bid = fair_value - spread_width/2
     ask = fair_value + spread_width/2
@@ -92,7 +92,7 @@ def make_quotes(fair_value, spread_width):
         "ask": ask
     }
 
-# Step 6 - execute_trade
+
 def execute_trade(state, side, bid, ask, size=1):
     cash = state['cash']
     inventory = state['inventory']
@@ -109,11 +109,11 @@ def execute_trade(state, side, bid, ask, size=1):
         'inventory': inventory
     }
 
-# Step 7 - mark_to_market_pnl
+
 def mark_to_market_pnl(cash, inventory, settlement_value):
     return cash + inventory * settlement_value
 
-# Step 8 - adverse_selection_loss
+
 def adverse_selection_loss(fair_value, bid, ask, informed_values, informed_probabilities):
     informed_values = np.array(informed_values)
     informed_probabilities = np.array(informed_probabilities)
@@ -125,19 +125,19 @@ def adverse_selection_loss(fair_value, bid, ask, informed_values, informed_proba
     
     return float(expected_loss)
 
-# Step 9 - uncertainty_spread
+
 def uncertainty_spread(base_spread, uncertainty):
     s = base_spread + uncertainty
     return s
 
-# Step 10 - inventory_skewed_quotes
+
 def inventory_skewed_quotes(fair_value, spread_width, inventory, skew_strength):
     half = spread_width / 2
     shift = inventory * skew_strength
     mid = fair_value - shift
     return {'bid': mid - half, 'ask': mid + half}
 
-# Step 11 - update_fair_value_from_trade
+
 def update_fair_value_from_trade(fair_value, side, bid, ask, adjustment):
     half_spread = (ask - bid) / 2
     
@@ -151,7 +151,7 @@ def update_fair_value_from_trade(fair_value, side, bid, ask, adjustment):
     new_fair = fair_value + direction * (adjustment * half_spread)
     return new_fair
 
-# Step 12 - update_remaining_card_value
+
 def update_remaining_card_value(remaining_counts, revealed_value):
     updated_counts = dict(remaining_counts)
     
@@ -178,7 +178,7 @@ def update_remaining_card_value(remaining_counts, revealed_value):
         'expected_value': ev
     }
 
-# Step 13 - run_market_making_episode
+
 def run_market_making_episode(true_value, counterparty_sides, initial_fair_value, config):
     base_spread = config.get('base_spread', 0.0)
     uncertainty = config.get('uncertainty', 0.0)
@@ -221,7 +221,7 @@ def run_market_making_episode(true_value, counterparty_sides, initial_fair_value
         'history': history
     }
 
-# Step 14 - summarize_episode_pnls
+
 def summarize_episode_pnls(pnls):
     pnls = np.array(pnls)
     return {
